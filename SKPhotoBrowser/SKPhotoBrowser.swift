@@ -262,6 +262,7 @@ open class SKPhotoBrowser: UIViewController {
 
 public extension SKPhotoBrowser {
     func updateCloseButton(_ image: UIImage, size: CGSize? = nil) {
+        guard isViewLoaded else { return }
         actionView.updateCloseButton(image: image, size: size)
     }
     
