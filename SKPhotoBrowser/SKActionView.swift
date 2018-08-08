@@ -91,11 +91,7 @@ class SKActionView: UIView {
 extension SKActionView {
     func configureCloseButton(image: UIImage? = nil, size: CGSize? = nil) {
         if closeButton == nil {
-            if #available(iOS 11.0, *) {
-                closeButton = SKCloseButton(frame: CGRect(x: 0, y: safeAreaInsets.top, width: 0, height: 0) )
-            } else {
-                closeButton = SKCloseButton(frame: .zero)
-            }
+                closeButton = SKCloseButton(frame: CGRect(x: 0, y: SKMesurement.isPhoneX ? 30 : 20, width: 0, height: 0) )
             closeButton.addTarget(self, action: #selector(closeButtonPressed(_:)), for: .touchUpInside)
             closeButton.isHidden = !SKPhotoBrowserOptions.displayCloseButton
             addSubview(closeButton)
