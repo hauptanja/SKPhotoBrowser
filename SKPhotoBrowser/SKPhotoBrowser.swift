@@ -556,6 +556,9 @@ private extension SKPhotoBrowser {
         actionView = SKActionView(frame: view.frame, browser: self)
         actionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(actionView)
+        if #available(iOS 11.0, *) {
+            view.insetsLayoutMarginsFromSafeArea = true
+        }
     }
 
     func configurePaginationView() {
