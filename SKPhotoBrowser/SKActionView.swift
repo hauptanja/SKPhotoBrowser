@@ -27,7 +27,9 @@ class SKActionView: UIView {
     convenience init(frame: CGRect, browser: SKPhotoBrowser) {
         self.init(frame: frame)
         self.browser = browser
-
+        if #available(iOS 11.0, *) {
+            insetsLayoutMarginsFromSafeArea = true
+        }
         configureCloseButton()
         configureDeleteButton()
     }
@@ -89,7 +91,11 @@ class SKActionView: UIView {
 extension SKActionView {
     func configureCloseButton(image: UIImage? = nil, size: CGSize? = nil) {
         if closeButton == nil {
-            closeButton = SKCloseButton(frame: .zero)
+            if #available(iOS 11.0, *) {
+                closeButton = SKCloseButton(frame: CGRect(x: 0, y: safeAreaInsets.top, width: 0, height: 0) )
+            } else {
+                closeButton = SKCloseButton(frame: .zero)
+            }
             closeButton.addTarget(self, action: #selector(closeButtonPressed(_:)), for: .touchUpInside)
             closeButton.isHidden = !SKPhotoBrowserOptions.displayCloseButton
             addSubview(closeButton)
