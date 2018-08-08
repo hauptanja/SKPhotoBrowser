@@ -100,6 +100,7 @@ extension SKActionView {
         
         guard let image = image else { return }
         closeButton.setImage(image, for: UIControlState())
+        closeButton.imageView?.contentMode = .scaleAspectFit
     }
     
     func configureDeleteButton(image: UIImage? = nil, size: CGSize? = nil) {
@@ -115,5 +116,7 @@ extension SKActionView {
         
         guard let image = image else { return }
         deleteButton.setImage(image, for: UIControlState())
+        closeButton.imageView?.contentMode = .scaleAspectFit
+
     }
 }

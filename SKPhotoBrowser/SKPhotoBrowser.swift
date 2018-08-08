@@ -554,6 +554,7 @@ private extension SKPhotoBrowser {
     
     func configureActionView() {
         actionView = SKActionView(frame: view.frame, browser: self)
+        actionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(actionView)
     }
 
