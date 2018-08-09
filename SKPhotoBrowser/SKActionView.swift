@@ -27,9 +27,6 @@ class SKActionView: UIView {
     convenience init(frame: CGRect, browser: SKPhotoBrowser) {
         self.init(frame: frame)
         self.browser = browser
-        if #available(iOS 11.0, *) {
-            insetsLayoutMarginsFromSafeArea = true
-        }
         configureCloseButton()
         configureDeleteButton()
     }
