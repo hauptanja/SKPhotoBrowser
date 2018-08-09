@@ -106,8 +106,8 @@ open class SKPhotoBrowser: UIViewController {
         configureAppearance()
         configurePagingScrollView()
         configureGestureControl()
-        configurePaginationView()
         configureActionView()
+        configurePaginationView()
         configureToolbar()
 
         animator.willPresent(self)

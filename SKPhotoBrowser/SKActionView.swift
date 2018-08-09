@@ -43,7 +43,6 @@ class SKActionView: UIView {
     
     func updateFrame(frame: CGRect) {
         self.frame = frame
-        layoutSubviews()
         setNeedsDisplay()
     }
 

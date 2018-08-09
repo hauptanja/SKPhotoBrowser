@@ -145,12 +145,14 @@ class SKPagingScrollView: UIScrollView {
             page.photo = browser.photos[index]
             
             visiblePages.append(page)
+            page.autoresizingMask = [.flexibleHeight, .flexibleWidth]
             addSubview(page)
             
             // if exists caption, insert
             if let captionView: SKCaptionView = createCaptionView(index) {
                 captionView.frame = frameForCaptionView(captionView, index: index)
                 captionView.alpha = browser.areControlsHidden() ? 0 : 1
+                captionView.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
                 addSubview(captionView)
                 // ref val for control
                 page.captionView = captionView
