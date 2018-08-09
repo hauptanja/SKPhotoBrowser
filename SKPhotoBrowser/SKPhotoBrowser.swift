@@ -408,7 +408,7 @@ internal extension SKPhotoBrowser {
     }
     
     func frameForActionView() -> CGRect {
-        let actionViewFrame = view.frame
+        var actionViewFrame = view.frame
         if #available(iOS 11.0, *) {
             actionViewFrame.origin.y = view.safeAreaInsets.top
         } else {
