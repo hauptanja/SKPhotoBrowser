@@ -91,7 +91,7 @@ extension SKActionView {
             closeButton = SKCloseButton(frame: .zero)
             closeButton.addTarget(self, action: #selector(closeButtonPressed(_:)), for: .touchUpInside)
             closeButton.isHidden = !SKPhotoBrowserOptions.displayCloseButton
-            closeButton.autoresizingMask = [.flexibleTopMargin, .flexibleLeftMargin]
+//            closeButton.autoresizingMask = [.flexibleTopMargin, .flexibleLeftMargin]
             addSubview(closeButton)
         }
 
