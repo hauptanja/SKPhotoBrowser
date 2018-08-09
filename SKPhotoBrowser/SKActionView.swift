@@ -111,7 +111,7 @@ extension SKActionView {
             deleteButton = SKDeleteButton(frame: .zero)
             deleteButton.addTarget(self, action: #selector(deleteButtonPressed(_:)), for: .touchUpInside)
             deleteButton.isHidden = !SKPhotoBrowserOptions.displayDeleteButton
-            deleteButton.autoresizingMask = [.flexibleTopMargin, .flexibleLeftMargin]
+            deleteButton.autoresizingMask = [.flexibleTopMargin, .flexibleRightMargin]
             addSubview(deleteButton)
         }
 
