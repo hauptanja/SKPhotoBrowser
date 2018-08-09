@@ -129,14 +129,12 @@ open class SKPhotoBrowser: UIViewController {
         isPerformingLayout = true
         // where did start
         delegate?.didShowPhotoAtIndex?(self, index: currentPageIndex)
-
-        // toolbar
-        toolbar.frame = frameForToolbarAtOrientation()
         
         // action
-        var actionViewFrame = view.frame
-        actionViewFrame.origin.y = SKMesurement.isPhoneX ? 30 : 20
-        actionView.updateFrame(frame: actionViewFrame)
+        actionView.updateFrame(frame: frameForActionView())
+        
+        // toolbar
+        toolbar.frame = frameForToolbarAtOrientation()
 
         // paging
         paginationView.updateFrame(frame: view.frame)
@@ -408,6 +406,18 @@ internal extension SKPhotoBrowser {
         pageFrame.origin.x = (bounds.size.width * CGFloat(index)) + 10
         return pageFrame
     }
+    
+    func frameForActionView() -> CGRect {
+        var actionViewFrame = view.frame
+        if #available(iOS 11.0, *) {
+            actionViewFrame.origin.y = view.safeAreaInsets.top
+        } else {
+            actionViewFrame.origin.y = 20
+        }
+        actionViewFrame.size.height -= actionViewFrame.origin.y
+        //        actionViewFrame.origin.y = SKMesurement.isPhoneX ? 30 : 20
+        return actionViewFrame
+    }
 }
 
 // MARK: - Internal Function For Button Pressed, UIGesture Control
@@ -556,14 +566,7 @@ private extension SKPhotoBrowser {
     }
     
     func configureActionView() {
-        var frame = view.frame
-        if #available(iOS 11.0, *) {
-            frame.origin.y = view.safeAreaInsets.top
-        } else {
-            frame.origin.y = 20
-        }
-//        frame.origin.y = SKMesurement.isPhoneX ? 30 : 20
-        actionView = SKActionView(frame: frame, browser: self)
+        actionView = SKActionView(frame: frameForActionView(), browser: self)
         actionView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         view.addSubview(actionView)
     }
