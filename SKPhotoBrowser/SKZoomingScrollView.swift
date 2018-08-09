@@ -62,6 +62,7 @@ open class SKZoomingScrollView: UIScrollView {
         imageView.delegate = self
         imageView.contentMode = .bottom
         imageView.backgroundColor = .clear
+        imageView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         addSubview(imageView)
         
         // indicator
