@@ -409,12 +409,12 @@ internal extension SKPhotoBrowser {
     
     func frameForActionView() -> CGRect {
         let actionViewFrame = view.frame
-//        if #available(iOS 11.0, *) {
-//            actionViewFrame.origin.y = view.safeAreaInsets.top
-//        } else {
-//            actionViewFrame.origin.y = 20
-//        }
-//        actionViewFrame.size.height -= actionViewFrame.origin.y
+        if #available(iOS 11.0, *) {
+            actionViewFrame.origin.y = view.safeAreaInsets.top
+        } else {
+            actionViewFrame.origin.y = 20
+        }
+        actionViewFrame.size.height -= actionViewFrame.origin.y
         return actionViewFrame
     }
 }
