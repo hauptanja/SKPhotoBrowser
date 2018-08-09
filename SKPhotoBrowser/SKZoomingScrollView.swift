@@ -90,13 +90,13 @@ open class SKZoomingScrollView: UIScrollView {
         
         // horizon
         if frameToCenter.size.width < boundsSize.width {
-            frameToCenter.origin.x = center.x//floor((boundsSize.width - frameToCenter.size.width) / 2)
+            frameToCenter.origin.x = floor((boundsSize.width - frameToCenter.size.width) / 2)
         } else {
             frameToCenter.origin.x = 0
         }
         // vertical
         if frameToCenter.size.height < boundsSize.height {
-            frameToCenter.origin.y = center.y//floor((boundsSize.height - frameToCenter.size.height) / 2)
+            frameToCenter.origin.y = floor((boundsSize.height - frameToCenter.size.height) / 2)
         } else {
             frameToCenter.origin.y = 0
         }

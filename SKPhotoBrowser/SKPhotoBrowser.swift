@@ -170,6 +170,10 @@ open class SKPhotoBrowser: UIViewController {
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         return SKPhotoBrowserOptions.statusBarStyle
     }
+    //Hide Home indicator on iPhone X
+    open override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return UIApplication.shared.statusBarOrientation.isLandscape
+    }
     
     // MARK: - Notification
     @objc open func handleSKPhotoLoadingDidEndNotification(_ notification: Notification) {
