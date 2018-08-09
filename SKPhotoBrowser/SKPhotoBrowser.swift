@@ -365,6 +365,7 @@ public extension SKPhotoBrowser {
 internal extension SKPhotoBrowser {
     func showButtons() {
         actionView.animate(hidden: false)
+        toolbar.isHidden = false
     }
     
     func pageDisplayedAtIndex(_ index: Int) -> SKZoomingScrollView? {
@@ -582,7 +583,8 @@ private extension SKPhotoBrowser {
         
         // action view animation
         actionView.animate(hidden: hidden)
-        
+        toolbar.isHidden = hidden
+
         if !permanent {
             hideControlsAfterDelay()
         }
