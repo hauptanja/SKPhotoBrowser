@@ -91,7 +91,7 @@ open class SKPhotoBrowser: UIViewController {
     }
     
     func setup() {
-        modalPresentationCapturesStatusBarAppearance = true
+//        modalPresentationCapturesStatusBarAppearance = true
         modalPresentationStyle = .custom
         modalTransitionStyle = .crossDissolve
         NotificationCenter.default.addObserver(self,
@@ -111,6 +111,7 @@ open class SKPhotoBrowser: UIViewController {
         configureToolbar()
 
         animator.willPresent(self)
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     override open func viewWillAppear(_ animated: Bool) {
