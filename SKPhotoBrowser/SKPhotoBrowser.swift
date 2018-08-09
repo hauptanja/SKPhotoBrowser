@@ -159,7 +159,7 @@ open class SKPhotoBrowser: UIViewController {
     override open var prefersStatusBarHidden: Bool {
         if SKPhotoBrowserOptions.displayStatusbar {
             guard #available(iOS 11.0, *) else { return true }
-            if self.view.safeAreaInsets.top > 30.0 {
+            if self.view.safeAreaInsets.top >= 30.0 {
                 return false
             }
             return true
