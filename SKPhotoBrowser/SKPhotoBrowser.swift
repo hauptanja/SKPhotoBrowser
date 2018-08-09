@@ -106,8 +106,8 @@ open class SKPhotoBrowser: UIViewController {
         configureAppearance()
         configurePagingScrollView()
         configureGestureControl()
-        configureActionView()
         configurePaginationView()
+        configureActionView()
         configureToolbar()
 
         animator.willPresent(self)
@@ -148,8 +148,19 @@ open class SKPhotoBrowser: UIViewController {
         isViewActive = true
     }
     
+//    override open var prefersStatusBarHidden: Bool {
+//        return !SKPhotoBrowserOptions.displayStatusbar
+//    }
     override open var prefersStatusBarHidden: Bool {
-        return !SKPhotoBrowserOptions.displayStatusbar
+        if SKPhotoBrowserOptions.displayStatusbar {
+            guard #available(iOS 11.0, *) else { return true }
+            if self.view.safeAreaInsets.top > 30.0 {
+                return false
+            }
+            return true
+        } else {
+            return !SKPhotoBrowserOptions.displayStatusbar
+        }
     }
     open override var preferredStatusBarStyle: UIStatusBarStyle {
         return SKPhotoBrowserOptions.statusBarStyle

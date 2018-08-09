@@ -30,8 +30,8 @@ class SKButton: UIButton {
     func setup(_ imageName: String) {
         backgroundColor = .clear
         imageEdgeInsets = insets
-        translatesAutoresizingMaskIntoConstraints = true
-        autoresizingMask = [.flexibleBottomMargin, .flexibleLeftMargin, .flexibleRightMargin, .flexibleTopMargin]
+//        translatesAutoresizingMaskIntoConstraints = true
+//        autoresizingMask = [.flexibleBottomMargin, .flexibleLeftMargin, .flexibleRightMargin, .flexibleTopMargin]
         
         let image = UIImage(named: "SKPhotoBrowser.bundle/images/\(imageName)", in: bundle, compatibleWith: nil) ?? UIImage()
         setImage(image, for: UIControlState())
