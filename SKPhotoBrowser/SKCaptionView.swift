@@ -47,7 +47,7 @@ open class SKCaptionView: UIView {
 private extension SKCaptionView {
     func setup() {
         isOpaque = false
-        autoresizingMask = [.flexibleWidth, .flexibleTopMargin, .flexibleRightMargin, .flexibleLeftMargin]
+//        autoresizingMask = [.flexibleWidth, .flexibleTopMargin, .flexibleRightMargin, .flexibleLeftMargin]
         
         // setup photoLabel
         setupPhotoLabel()

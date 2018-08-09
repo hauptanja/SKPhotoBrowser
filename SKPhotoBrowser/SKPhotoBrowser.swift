@@ -142,7 +142,12 @@ open class SKPhotoBrowser: UIViewController {
 
         isPerformingLayout = false
     }
-    
+    open override func viewSafeAreaInsetsDidChange() {
+        if #available(iOS 11.0, *) {
+            super.viewSafeAreaInsetsDidChange()
+            pagingScrollView.updateFrame(view.bounds, currentPageIndex: currentPageIndex)
+        }
+    }
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         isViewActive = true
