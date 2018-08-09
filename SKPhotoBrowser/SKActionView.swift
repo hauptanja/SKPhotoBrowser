@@ -91,9 +91,10 @@ class SKActionView: UIView {
 extension SKActionView {
     func configureCloseButton(image: UIImage? = nil, size: CGSize? = nil) {
         if closeButton == nil {
-                closeButton = SKCloseButton(frame: CGRect(x: 0, y: SKMesurement.isPhoneX ? 30 : 20, width: 0, height: 0) )
+            closeButton = SKCloseButton(frame: .zero)//CGRect(x: 0, y: SKMesurement.isPhoneX ? 30 : 20, width: 0, height: 0)
             closeButton.addTarget(self, action: #selector(closeButtonPressed(_:)), for: .touchUpInside)
             closeButton.isHidden = !SKPhotoBrowserOptions.displayCloseButton
+            closeButton.autoresizingMask = [.flexibleTopMargin, .flexibleLeftMargin]
             addSubview(closeButton)
         }
 
@@ -110,6 +111,7 @@ extension SKActionView {
             deleteButton = SKDeleteButton(frame: .zero)
             deleteButton.addTarget(self, action: #selector(deleteButtonPressed(_:)), for: .touchUpInside)
             deleteButton.isHidden = !SKPhotoBrowserOptions.displayDeleteButton
+            deleteButton.autoresizingMask = [.flexibleTopMargin, .flexibleLeftMargin]
             addSubview(deleteButton)
         }
 
