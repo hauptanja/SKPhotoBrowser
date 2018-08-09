@@ -134,7 +134,9 @@ open class SKPhotoBrowser: UIViewController {
         toolbar.frame = frameForToolbarAtOrientation()
         
         // action
-        actionView.updateFrame(frame: view.frame)
+        var actionViewFrame = view.frame
+        actionViewFrame.origin.y = SKMesurement.isPhoneX ? 30 : 20
+        actionView.updateFrame(frame: actionViewFrame)
 
         // paging
         paginationView.updateFrame(frame: view.frame)
@@ -557,7 +559,7 @@ private extension SKPhotoBrowser {
         var frame = view.frame
         frame.origin.y = SKMesurement.isPhoneX ? 30 : 20
         actionView = SKActionView(frame: frame, browser: self)
-        actionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        actionView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         view.addSubview(actionView)
     }
 

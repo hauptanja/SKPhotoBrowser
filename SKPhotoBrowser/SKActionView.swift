@@ -88,7 +88,7 @@ class SKActionView: UIView {
 extension SKActionView {
     func configureCloseButton(image: UIImage? = nil, size: CGSize? = nil) {
         if closeButton == nil {
-            closeButton = SKCloseButton(frame: .zero)//CGRect(x: 0, y: SKMesurement.isPhoneX ? 30 : 20, width: 0, height: 0)
+            closeButton = SKCloseButton(frame: .zero)
             closeButton.addTarget(self, action: #selector(closeButtonPressed(_:)), for: .touchUpInside)
             closeButton.isHidden = !SKPhotoBrowserOptions.displayCloseButton
             closeButton.autoresizingMask = [.flexibleTopMargin, .flexibleLeftMargin]
