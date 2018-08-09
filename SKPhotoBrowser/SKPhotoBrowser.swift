@@ -557,7 +557,12 @@ private extension SKPhotoBrowser {
     
     func configureActionView() {
         var frame = view.frame
-        frame.origin.y = SKMesurement.isPhoneX ? 30 : 20
+        if #available(iOS 11.0, *) {
+            frame.origin.y = view.safeAreaInsets.top
+        } else {
+            frame.origin.y = 20
+        }
+//        frame.origin.y = SKMesurement.isPhoneX ? 30 : 20
         actionView = SKActionView(frame: frame, browser: self)
         actionView.autoresizingMask = [.flexibleWidth, .flexibleTopMargin]
         view.addSubview(actionView)
@@ -570,6 +575,7 @@ private extension SKPhotoBrowser {
     
     func configureToolbar() {
         toolbar = SKToolbar(frame: frameForToolbarAtOrientation(), browser: self)
+        toolbar.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
         actionView.addSubview(toolbar)
     }
 
