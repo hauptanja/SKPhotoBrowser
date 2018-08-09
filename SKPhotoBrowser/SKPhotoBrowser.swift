@@ -555,7 +555,7 @@ private extension SKPhotoBrowser {
     func configureActionView() {
         var frame = view.frame
         frame.origin.y = SKMesurement.isPhoneX ? 30 : 20
-        actionView = SKActionView(frame: view.frame, browser: self)
+        actionView = SKActionView(frame: frame, browser: self)
         actionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(actionView)
     }
