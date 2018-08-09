@@ -394,11 +394,11 @@ internal extension SKPhotoBrowser {
                 return 15
             }
         }()
-        return view.bounds.divided(atDistance: 44, from: .maxYEdge).slice.offsetBy(dx: 0, dy: -offset)
+        return actionView.bounds.divided(atDistance: 44, from: .maxYEdge).slice.offsetBy(dx: 0, dy: -offset)
     }
     
     func frameForToolbarHideAtOrientation() -> CGRect {
-        return view.bounds.divided(atDistance: 44, from: .maxYEdge).slice.offsetBy(dx: 0, dy: 44)
+        return actionView.bounds.divided(atDistance: 44, from: .maxYEdge).slice.offsetBy(dx: 0, dy: 44)
     }
     
     func frameForPageAtIndex(_ index: Int) -> CGRect {
