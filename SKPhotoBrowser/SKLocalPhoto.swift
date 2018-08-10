@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - SKLocalPhoto
 open class SKLocalPhoto: NSObject, SKPhotoProtocol {
-    
+    open var photoDisplayType: SKPhotoDisplayType
     open var underlyingImage: UIImage!
     open var photoURL: String!
     open var contentMode: UIViewContentMode = .scaleToFill
@@ -19,16 +19,19 @@ open class SKLocalPhoto: NSObject, SKPhotoProtocol {
     open var index: Int = 0
     
     override init() {
+        self.photoDisplayType = .noImage
         super.init()
     }
     
     convenience init(url: String) {
         self.init()
+        self.photoDisplayType = .noImage
         photoURL = url
     }
     
     convenience init(url: String, holder: UIImage?) {
         self.init()
+        self.photoDisplayType = .placeholderImage
         photoURL = url
         underlyingImage = holder
     }
@@ -38,6 +41,7 @@ open class SKLocalPhoto: NSObject, SKPhotoProtocol {
     open func loadUnderlyingImageAndNotify() {
         
         if underlyingImage != nil && photoURL == nil {
+            self.photoDisplayType = .finalImage
             loadUnderlyingImageComplete()
         }
         
@@ -48,6 +52,7 @@ open class SKLocalPhoto: NSObject, SKPhotoProtocol {
                     self.loadUnderlyingImageComplete()
                     if let image = UIImage(data: data) {
                         self.underlyingImage = image
+                        self.photoDisplayType = .finalImage
                         self.loadUnderlyingImageComplete()
                     }
                 }
