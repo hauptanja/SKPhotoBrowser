@@ -112,7 +112,7 @@ class SKPagingScrollView: UIScrollView {
     }
     
     func tilePages() {
-        guard let browser = browser else { return }
+        guard let browser = browser, browser.photos.count > 0 else { return }
         
         let firstIndex: Int = getFirstIndex()
         let lastIndex: Int = getLastIndex()

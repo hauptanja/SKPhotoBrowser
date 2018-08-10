@@ -379,6 +379,11 @@ public extension SKPhotoBrowser {
         self.photos.insert(contentsOf: photos, at: index)
         self.reloadData()
     }
+    
+    func replacePhotos(photos: [SKPhotoProtocol]) {
+        self.photos = photos
+        self.reloadData()
+    }
 }
 
 // MARK: - Internal Function
