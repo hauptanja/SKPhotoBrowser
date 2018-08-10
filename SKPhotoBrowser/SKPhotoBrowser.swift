@@ -26,7 +26,9 @@ open class SKPhotoBrowser: UIViewController {
     
     fileprivate var actionView: SKActionView!
     fileprivate(set) var paginationView: SKPaginationView!
-    fileprivate var toolbar: SKToolbar!
+    fileprivate var toolbar: SKToolbar! {
+        return actionView.toolbar
+    }
 
     // actions
     fileprivate var activityViewController: UIActivityViewController!
@@ -108,7 +110,6 @@ open class SKPhotoBrowser: UIViewController {
         configureGestureControl()
         configurePaginationView()
         configureActionView()
-        configureToolbar()
 
         animator.willPresent(self)
         setNeedsStatusBarAppearanceUpdate()
@@ -134,9 +135,6 @@ open class SKPhotoBrowser: UIViewController {
         // action
         actionView.updateFrame(frame: frameForActionView())
         
-        // toolbar
-        toolbar.frame = frameForToolbarAtOrientation()
-
         // paging
         paginationView.updateFrame(frame: view.frame)
         pagingScrollView.updateFrame(view.bounds, currentPageIndex: currentPageIndex)
@@ -391,7 +389,6 @@ public extension SKPhotoBrowser {
 internal extension SKPhotoBrowser {
     func showButtons() {
         actionView.animate(hidden: false)
-        toolbar.isHidden = false
     }
     
     func pageDisplayedAtIndex(_ index: Int) -> SKZoomingScrollView? {
@@ -410,21 +407,6 @@ internal extension SKPhotoBrowser {
 // MARK: - Internal Function For Frame Calc
 
 internal extension SKPhotoBrowser {
-    func frameForToolbarAtOrientation() -> CGRect {
-        let offset: CGFloat = {
-            if #available(iOS 11.0, *) {
-                return view.safeAreaInsets.bottom
-            } else {
-                return 15
-            }
-        }()
-        return actionView.bounds.divided(atDistance: 44, from: .maxYEdge).slice.offsetBy(dx: 0, dy: -offset)
-    }
-    
-    func frameForToolbarHideAtOrientation() -> CGRect {
-        return actionView.bounds.divided(atDistance: 44, from: .maxYEdge).slice.offsetBy(dx: 0, dy: 44)
-    }
-    
     func frameForPageAtIndex(_ index: Int) -> CGRect {
         let bounds = pagingScrollView.bounds
         var pageFrame = bounds
@@ -600,12 +582,6 @@ private extension SKPhotoBrowser {
         paginationView = SKPaginationView(frame: view.frame, browser: self)
         view.addSubview(paginationView)
     }
-    
-    func configureToolbar() {
-        toolbar = SKToolbar(frame: frameForToolbarAtOrientation(), browser: self)
-        toolbar.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
-        actionView.addSubview(toolbar)
-    }
 
     func setControlsHidden(_ hidden: Bool, animated: Bool, permanent: Bool) {
         // timer update
@@ -619,7 +595,6 @@ private extension SKPhotoBrowser {
         
         // action view animation
         actionView.animate(hidden: hidden)
-        toolbar.isHidden = hidden
 
         if !permanent {
             hideControlsAfterDelay()

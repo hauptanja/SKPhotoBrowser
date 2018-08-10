@@ -12,7 +12,8 @@ class SKActionView: UIView {
     internal weak var browser: SKPhotoBrowser?
     internal var closeButton: SKCloseButton!
     internal var deleteButton: SKDeleteButton!
-    
+    internal var toolbar: SKToolbar!
+
     // Action
     fileprivate var cancelTitle = "Cancel"
     
@@ -29,11 +30,12 @@ class SKActionView: UIView {
         self.browser = browser
         configureCloseButton()
         configureDeleteButton()
+        configureToolbar()
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if let view = super.hitTest(point, with: event) {
-            if closeButton.frame.contains(point) || deleteButton.frame.contains(point) {
+            if closeButton.frame.contains(point) || deleteButton.frame.contains(point) || toolbar.frame.contains(point) {
                 return view
             }
             return nil
@@ -43,6 +45,7 @@ class SKActionView: UIView {
     
     func updateFrame(frame: CGRect) {
         self.frame = frame
+        toolbar.frame = frameForToolbarAtOrientation()
         setNeedsDisplay()
     }
 
@@ -69,7 +72,30 @@ class SKActionView: UIView {
                             self.deleteButton.alpha = alpha
                             self.deleteButton.frame = deleteFrame
                         }
+                        self.toolbar.alpha = alpha
         }, completion: nil)
+    }
+    
+    func configureToolbar() {
+        guard let browser = browser else { return }
+        toolbar = SKToolbar(frame: frameForToolbarAtOrientation(), browser: browser)
+        toolbar.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
+        addSubview(toolbar)
+    }
+    
+    func frameForToolbarAtOrientation() -> CGRect {
+        let offset: CGFloat = {
+            if #available(iOS 11.0, *) {
+                return superview?.safeAreaInsets.bottom ?? 15
+            } else {
+                return 15
+            }
+        }()
+        return bounds.divided(atDistance: 44, from: .maxYEdge).slice.offsetBy(dx: 0, dy: -offset)
+    }
+    
+    func frameForToolbarHideAtOrientation() -> CGRect {
+        return bounds.divided(atDistance: 44, from: .maxYEdge).slice.offsetBy(dx: 0, dy: 44)
     }
     
     @objc func closeButtonPressed(_ sender: UIButton) {
