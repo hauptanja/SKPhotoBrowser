@@ -8,11 +8,15 @@
 
 import UIKit
 
+@objc public enum SKPhotoDisplayType: Int {
+    case placeholderImage, finalImage, noImage
+}
 @objc public protocol SKPhotoProtocol: NSObjectProtocol {
     var index: Int { get set }
     var underlyingImage: UIImage! { get }
     var caption: String? { get }
     var contentMode: UIViewContentMode { get set }
+    var photoDisplayType: SKPhotoDisplayType { get set }
     func loadUnderlyingImageAndNotify()
     func checkCache()
 }
@@ -25,23 +29,28 @@ open class SKPhoto: NSObject, SKPhotoProtocol {
     open var contentMode: UIViewContentMode = .scaleAspectFill
     open var shouldCachePhotoURLImage: Bool = false
     open var photoURL: String!
+    open var photoDisplayType: SKPhotoDisplayType
 
     override init() {
+        self.photoDisplayType = .noImage
         super.init()
     }
     
     convenience init(image: UIImage) {
         self.init()
+        photoDisplayType = .finalImage
         underlyingImage = image
     }
     
     convenience init(url: String) {
         self.init()
+        photoDisplayType = .noImage
         photoURL = url
     }
     
     convenience init(url: String, holder: UIImage?) {
         self.init()
+        photoDisplayType = .placeholderImage
         photoURL = url
         underlyingImage = holder
     }
@@ -78,6 +87,7 @@ open class SKPhoto: NSObject, SKPhotoProtocol {
 
                 guard error == nil else {
                     DispatchQueue.main.async {
+                        self.photoDisplayType = .noImage
                         self.loadUnderlyingImageComplete()
                     }
                     return
@@ -93,6 +103,7 @@ open class SKPhoto: NSObject, SKPhotoProtocol {
                     }
                     DispatchQueue.main.async {
                         self.underlyingImage = image
+                        self.photoDisplayType = .finalImage
                         self.loadUnderlyingImageComplete()
                     }
                 }
